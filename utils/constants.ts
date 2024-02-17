@@ -1,3 +1,4 @@
+export const LIGHTNESS_LIGHTEST = 10;
 export const LIGHTNESS_FOREGROUND = 30;
 export const LIGHTNESS_MID = 60;
 export const LIGHTNESS_SHADOW = 80;
