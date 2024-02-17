@@ -10,8 +10,13 @@ const dm_mono = DM_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rang.boidushya.com"),
   title: "Rang - The Color Accuracy Game!",
   description: "Test your color accuracy with Rang!",
+  openGraph: {
+    title: "Rang - The Color Accuracy Game!",
+    description: "Test your color accuracy with Rang!",
+  },
 };
 
 export default function RootLayout({
