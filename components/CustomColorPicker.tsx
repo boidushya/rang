@@ -15,9 +15,12 @@ import {
   LIGHTNESS_FOREGROUND,
   LIGHTNESS_SHADOW,
 } from "@/utils/constants";
+import { useIsDesktop } from "@/utils/hooks";
 
 const CustomColorPicker = () => {
   const { color, setColor, getColorHex, setColorHex } = useColorStore();
+
+  const isDesktop = useIsDesktop();
 
   const borderColor = getStringFromHSL({
     ...color,
@@ -37,10 +40,10 @@ const CustomColorPicker = () => {
     <div
       style={{
         borderColor,
-        boxShadow,
+        boxShadow: isDesktop ? boxShadow : `none`,
         backgroundColor,
       }}
-      className="custom-color-picker border-8 h-96 w-96 flex flex-col"
+      className="custom-color-picker border-8 h-64 md:h-96 w-full md:w-96 flex flex-col "
     >
       <HslColorPicker color={color} onChange={setColor} />
     </div>

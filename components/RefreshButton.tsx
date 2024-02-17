@@ -22,7 +22,7 @@ const RefreshButton = () => {
   });
 
   return (
-    <div className="absolute -bottom-2 -right-2 p-12">
+    <div className="absolute -bottom-2 -right-2 p-4 py-6 md:py-12 md:p-12">
       <button
         style={{ color, backgroundColor }}
         className="h-16 w-16 grid place-items-center rounded-full group"

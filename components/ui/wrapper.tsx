@@ -20,7 +20,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
         backgroundSize: "48px 48px",
         backgroundPosition: "-22px -22px",
       }}
-      className="h-screen flex items-center justify-center gap-24 w-full overflow-hidden relative"
+      className="h-screen flex md:flex-row flex-col items-center justify-center gap-0 md:gap-24 w-full overflow-hidden relative"
     >
       {children}
     </main>

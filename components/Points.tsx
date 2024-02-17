@@ -74,9 +74,10 @@ const Points = () => {
           backgroundColor: currentBackgroundColor,
           color: currentForegroundColor,
         }}
-        className="p-3 py-2 flex items-center justify-center font-mono"
+        className="p-3 py-2 flex items-center gap-1 justify-center font-mono"
       >
         {points}
+        <span className="text-sm">%</span>
       </div>
     </div>
   );
