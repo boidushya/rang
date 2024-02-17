@@ -15,7 +15,7 @@ const Title = () => {
     ...randomColor,
     l: LIGHTNESS_SHADOW,
   };
-  const textShadow = `2px 2px 0 ${getStringFromHSL(shadowColor)}`;
+  const textShadow = `4px 4px 0 ${getStringFromHSL(shadowColor)}`;
   return (
     <h1
       style={{
