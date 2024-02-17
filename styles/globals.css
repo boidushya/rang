@@ -1,0 +1,15 @@
+@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@1&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-zinc-50 grid place-items-center h-screen;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

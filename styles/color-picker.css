@@ -1,0 +1,9 @@
+.custom-color-picker .react-colorful {
+  @apply h-full w-full rounded-none shadow-xl;
+}
+.custom-color-picker .react-colorful__saturation {
+  @apply rounded-none;
+}
+.custom-color-picker .react-colorful__hue {
+  @apply rounded-none;
+}
