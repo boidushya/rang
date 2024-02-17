@@ -17,6 +17,9 @@ const config: Config = {
         sans: ["Cabinet Grotesk", "sans-serif"],
         mono: ["var(--font-dm-mono)"],
       },
+      animation: {
+        "bounce-fast": "bounce 0.6s infinite",
+      },
     },
   },
   plugins: [],

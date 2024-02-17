@@ -2,7 +2,12 @@
 
 import { useColorStore } from "@/store/ColorUtils";
 import React from "react";
-import { HslColorPicker } from "react-colorful";
+import {
+  HexColorInput,
+  HslColorPicker,
+  HslStringColorPicker,
+  RgbStringColorPicker,
+} from "react-colorful";
 import "@/styles/color-picker.css";
 import { getStringFromHSL } from "@/utils/functions";
 import {
@@ -12,7 +17,7 @@ import {
 } from "@/utils/constants";
 
 const CustomColorPicker = () => {
-  const { color, setColor } = useColorStore();
+  const { color, setColor, getColorHex, setColorHex } = useColorStore();
 
   const borderColor = getStringFromHSL({
     ...color,
@@ -35,7 +40,7 @@ const CustomColorPicker = () => {
         boxShadow,
         backgroundColor,
       }}
-      className="custom-color-picker border-8 h-96 w-96"
+      className="custom-color-picker border-8 h-96 w-96 flex flex-col"
     >
       <HslColorPicker color={color} onChange={setColor} />
     </div>
