@@ -32,7 +32,7 @@ const ColorSection = () => {
             })}`
           : `none`,
       }}
-      className="h-auto md:h-96 w-full aspect-square md:aspect-auto md:w-96 grid grid-rows-2 grid-cols-2 overflow-hidden border-8 "
+      className="h-auto md:h-96 w-full aspect-square md:aspect-auto md:w-96 grid grid-rows-2 grid-cols-2 overflow-hidden border-4 md:border-8 "
     >
       <div
         className="col-start-2 row-start-2 grid place-items-center uppercase font-bold font-mono text-2xl"
