@@ -5,11 +5,15 @@
 @tailwind utilities;
 
 body {
-  @apply bg-zinc-50 grid place-items-center h-screen;
+  @apply bg-zinc-50 grid place-items-center h-d-screen;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .h-d-screen {
+    height: 100vh; /* fallback for Opera, IE and etc. */
+    height: 100dvh;
   }
 }

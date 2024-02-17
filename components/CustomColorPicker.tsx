@@ -43,7 +43,7 @@ const CustomColorPicker = () => {
         boxShadow: isDesktop ? boxShadow : `none`,
         backgroundColor,
       }}
-      className="custom-color-picker border-8 h-64 md:h-96 w-full md:w-96 flex flex-col "
+      className="custom-color-picker border-4 md:border-8 h-48 md:h-96 w-full md:w-96 flex flex-col "
     >
       <HslColorPicker color={color} onChange={setColor} />
     </div>
