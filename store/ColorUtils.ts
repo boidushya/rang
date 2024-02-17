@@ -1,6 +1,5 @@
 import { generateRandomColor } from "@/utils/functions";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
 
 export type TColorHSL = {
   h: number;
@@ -15,14 +14,14 @@ export interface IColorStore {
   changeRandomColor: () => void;
 }
 
+const initialColor = generateRandomColor();
+const initialRandomColor = generateRandomColor();
+
 export const useColorStore: () => IColorStore = create<IColorStore>()(
-  persist(
-    (set) => ({
-      color: generateRandomColor(),
-      randomColor: generateRandomColor(),
-      setColor: (color: TColorHSL) => set({ color }),
-      changeRandomColor: () => set({ randomColor: generateRandomColor() }),
-    }),
-    { name: "__R::ColorStore" }
-  )
+  (set) => ({
+    color: initialColor,
+    randomColor: initialRandomColor,
+    setColor: (color: TColorHSL) => set({ color }),
+    changeRandomColor: () => set({ randomColor: generateRandomColor() }),
+  })
 );
