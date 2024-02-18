@@ -7,7 +7,7 @@ import Nav from "@/components/ui/nav";
 import RefreshButton from "@/components/RefreshButton";
 import Loader from "@/components/Loader";
 import WinScreen from "@/components/WinScreen";
-import Date from "@/components/Date";
+import Edition from "@/components/Edition";
 import { TimerProvider } from "@layerhub-io/use-timer";
 import { useColorStore } from "@/store/ColorUtils";
 import React from "react";
@@ -50,7 +50,7 @@ export default function Home() {
             <ColorSection />
             <CustomColorPicker />
             <div className="flex items-center justify-between w-full p-4 py-6 md:py-12 md:p-12 fixed bottom-0 left-0">
-              <Date />
+              <Edition />
               <Points />
             </div>
           </Wrapper>

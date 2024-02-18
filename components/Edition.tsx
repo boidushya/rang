@@ -10,7 +10,7 @@ import { getStringFromHSL } from "@/utils/functions";
 import { format } from "date-fns";
 import React from "react";
 
-const DateSection = () => {
+const Edition = () => {
   const { randomColor, edition } = useColorStore();
 
   const backgroundColor = getStringFromHSL({
@@ -32,4 +32,4 @@ const DateSection = () => {
   );
 };
 
-export default DateSection;
+export default Edition;
