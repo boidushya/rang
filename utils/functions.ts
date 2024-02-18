@@ -21,6 +21,12 @@ export function generateRandomColor(): TColorHSL {
   };
 }
 
+export async function fetchRandomColor() {
+  const response = await fetch("/api/getHSL");
+  const data = await response.json();
+  return data;
+}
+
 function hue2rgb(p: number, q: number, t: number) {
   if (t < 0) t += 1;
   if (t > 1) t -= 1;
@@ -207,4 +213,51 @@ export function hexToHsl(hex: string): TColorHSL {
   }
 
   return rgbToHsl({ r: +r, g: +g, b: +b });
+}
+
+export function timeToString(time: number, padding = 2) {
+  const { millis, seconds, minutes, hours } = formatElapsedTime(time);
+  const paddedSeconds = seconds.toString().padStart(padding, "0");
+  const paddedMillis = millis.toString().padStart(3, "0");
+
+  let formattedTime = `${paddedSeconds}.${paddedMillis}`;
+  if (minutes > 0) {
+    const paddedMinutes = minutes.toString().padStart(padding, "0");
+    formattedTime = `${paddedMinutes}:${formattedTime}`;
+  }
+  if (hours > 0) {
+    const paddedHours = hours.toString().padStart(padding, "0");
+    formattedTime = `${paddedHours}:${formattedTime}`;
+  }
+
+  return formattedTime;
+}
+
+export function formatElapsedTime(elapsedTime: number) {
+  // elapsedTime is returned by performance.now() in milliseconds
+
+  const millis = Math.floor(elapsedTime % 1000);
+  const seconds = Math.floor((elapsedTime / 1000) % 60);
+  const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+  const hours = Math.floor((elapsedTime / (1000 * 60 * 60)) % 24);
+
+  return {
+    millis,
+    seconds,
+    minutes,
+    hours,
+  };
+}
+
+export function elapsedTimeToString(elapsedTime: number) {
+  const { millis, seconds, minutes, hours } = formatElapsedTime(elapsedTime);
+  let formattedTime = `${seconds}.${millis} secs`;
+  if (minutes > 0) {
+    formattedTime = `${minutes} mins and ${formattedTime}`;
+  }
+  if (hours > 0) {
+    formattedTime = `${hours} hrs, ${formattedTime}`;
+  }
+
+  return formattedTime;
 }
