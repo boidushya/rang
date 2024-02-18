@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import { NextRequest, NextResponse } from "next/server";
 import prand, { mersenne } from "pure-rand";
 
@@ -6,21 +5,21 @@ function getDateDifference(startDate: Date, endDate: Date) {
   const oneDay = 1000 * 60 * 60 * 24;
 
   const start = Date.UTC(
-    endDate.getFullYear(),
-    endDate.getMonth(),
-    endDate.getDate()
+    endDate.getUTCFullYear(),
+    endDate.getUTCMonth(),
+    endDate.getUTCDate()
   );
   const end = Date.UTC(
-    startDate.getFullYear(),
-    startDate.getMonth(),
-    startDate.getDate()
+    startDate.getUTCFullYear(),
+    startDate.getUTCMonth(),
+    startDate.getUTCDate()
   );
 
   return (start - end) / oneDay;
 }
 
 const getUniformDate = (date: Date) => {
-  const utcString = date.toISOString();
+  const utcString = date.toUTCString();
 
   const uniformDate = new Date(utcString);
 
@@ -44,7 +43,7 @@ export async function GET(request: NextRequest) {
 
   const rng = mersenne(seed);
 
-  const startDate = getUniformDate(new Date(2024, 1, 19));
+  const startDate = new Date(2024, 1, 18);
   const edition = getDateDifference(startDate, getUniformDate(new Date())) + 1;
 
   const h = prand.unsafeUniformIntDistribution(0, 360, rng);
@@ -60,7 +59,6 @@ export async function GET(request: NextRequest) {
   return NextResponse.json(
     {
       ...hsl,
-      seed,
       edition,
     },
     { status: 200 }
