@@ -39,7 +39,7 @@ const WinScreen = () => {
         >
           <h1
             className={cn(
-              "absolute top-0 left-1/2 -translate-x-1/2 py-12 font-black text-xl md:text-4xl w-full",
+              "absolute top-0 left-1/2 -translate-x-1/2 py-12 font-black text-3xl md:text-5xl w-full",
               isTryhardModeSolved ? "text-zinc-300/75" : "text-zinc-900/75"
             )}
           >
