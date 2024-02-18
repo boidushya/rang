@@ -20,14 +20,25 @@ function getDateDifference(startDate: Date, endDate: Date) {
 }
 
 const getUniformDate = (date: Date) => {
-  let userTimezoneOffset = date.getTimezoneOffset() * 60000;
-  return new Date(date.getTime() - userTimezoneOffset);
+  const utcString = date.toISOString();
+
+  const uniformDate = new Date(utcString);
+
+  return uniformDate;
+};
+
+const getFormattedDate = (date: Date): string => {
+  const year = date.getUTCFullYear();
+  const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+  const day = date.getUTCDate().toString().padStart(2, "0");
+
+  return `${year}${month}${day}`;
 };
 
 export async function GET(request: NextRequest) {
   const seed_salt = process.env.SEED_SALT;
   const date = getUniformDate(new Date());
-  const formattedDate = format(date, "yyyyMMdd");
+  const formattedDate = getFormattedDate(date);
 
   const seed = Number(formattedDate + seed_salt);
 
