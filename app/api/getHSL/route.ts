@@ -26,6 +26,8 @@ export async function GET(request: NextRequest) {
 
   const seed = Number(formattedDate + seed_salt);
 
+  console.log(seed);
+
   const rng = mersenne(seed);
 
   const startDate = new Date(2024, 1, 19);
