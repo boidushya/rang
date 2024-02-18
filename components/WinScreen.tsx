@@ -1,19 +1,17 @@
-import { useWinStore } from "@/store/ColorUtils";
+import { useColorStore, useWinStore } from "@/store/ColorUtils";
 import { useTimerStore } from "@/store/TimerUtils";
 import { cn, elapsedTimeToString } from "@/utils/functions";
 import { useTimer } from "@layerhub-io/use-timer";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { format } from "date-fns";
 
 const WinScreen = () => {
   const { win, setTryhardMode, winText, isTryhardModeSolved } = useWinStore();
+  const { edition } = useColorStore();
   const { start } = useTimer();
   const { elapsedTime, resetTimer } = useTimerStore();
   const formattedElapsedTime = elapsedTimeToString(elapsedTime);
 
-  const date = new Date().toUTCString();
-  const formattedDate = format(date, "MMMM d, yyyy");
   return (
     <AnimatePresence>
       {win && (
@@ -49,8 +47,8 @@ const WinScreen = () => {
           </h1>
           <div
             className={cn(
-              "absolute bottom-0 left-0 px-6 py-4 text-xs md:text-lg font-medium",
-              isTryhardModeSolved ? "text-zinc-300/50" : "text-zinc-900/50"
+              "absolute bottom-0 left-0 px-6 py-4 text-base md:text-2xl font-medium",
+              isTryhardModeSolved ? "text-zinc-300/60" : "text-zinc-900/60"
             )}
           >
             <a href="https://rang.boidushya.com" target="_blank">
@@ -59,11 +57,11 @@ const WinScreen = () => {
           </div>
           <p
             className={cn(
-              "absolute bottom-0 right-0 px-6 py-4 text-xs md:text-lg font-medium",
-              isTryhardModeSolved ? "text-zinc-300/50" : "text-zinc-900/50"
+              "absolute bottom-0 right-0 px-6 py-4 text-base md:text-2xl font-medium",
+              isTryhardModeSolved ? "text-zinc-300/60" : "text-zinc-900/60"
             )}
           >
-            {formattedDate}
+            Edition #{edition}
           </p>
           <div className="flex flex-col items-center gap-4 px-12">
             <h1 className="text-4xl md:text-7xl font-black">
@@ -83,21 +81,14 @@ const WinScreen = () => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5 text-orange-200"
+                  fill="currentColor"
+                  className="w-5 h-5 text-orange-400"
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
+                    fillRule="evenodd"
+                    d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.176 7.547 7.547 0 0 1-1.705-1.715.75.75 0 0 0-1.152-.082A9 9 0 1 0 15.68 4.534a7.46 7.46 0 0 1-2.717-2.248ZM15.75 14.25a3.75 3.75 0 1 1-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 0 1 1.925-3.546 3.75 3.75 0 0 1 3.255 3.718Z"
+                    clipRule="evenodd"
                   />
                 </svg>
                 Tryhard Mode

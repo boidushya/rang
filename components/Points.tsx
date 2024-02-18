@@ -6,6 +6,7 @@ import {
 } from "@/utils/constants";
 import { calculatePoints, getStringFromHSL } from "@/utils/functions";
 import React, { useMemo } from "react";
+import InfoDialog from "./InfoDialog";
 
 const Points = () => {
   const { isTryhardMode } = useWinStore();
@@ -44,7 +45,8 @@ const Points = () => {
   })}`;
 
   return (
-    <>
+    <div className="flex items-center justify-center gap-3">
+      <InfoDialog />
       {showPercent && (
         <div
           className="flex items-center justify-center uppercase font-medium text-sm"
@@ -84,7 +86,7 @@ const Points = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -14,6 +14,7 @@ export type TColorHSL = {
 };
 
 export interface IColorStore {
+  edition: number;
   color: TColorHSL;
   randomColor: TColorHSL;
   setFixedRandomColor: () => void;
@@ -44,10 +45,12 @@ export const useColorStore: () => IColorStore = create<IColorStore>()(
     const initialRandomColor = null as unknown as TColorHSL;
     return {
       color: initialColor,
+      edition: 0,
       randomColor: initialRandomColor,
       setFixedRandomColor: async () => {
-        const color = await fetchRandomColor();
-        set({ randomColor: color });
+        const { edition, ...hsl } = await fetchRandomColor();
+        set({ randomColor: hsl });
+        set({ edition });
       },
       getColorHex: () => hslToHex(get().color),
       setColor: (color: TColorHSL) => set({ color }),
