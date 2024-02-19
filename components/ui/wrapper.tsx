@@ -1,17 +1,20 @@
 "use client";
 
-import { useColorStore } from "@/store/ColorUtils";
+import { useColorStore, useWinStore } from "@/store/ColorUtils";
 import { LIGHTNESS_BACKGROUND, LIGHTNESS_FOREGROUND } from "@/utils/constants";
-import { getStringFromHSL } from "@/utils/functions";
+import { cn, getStringFromHSL } from "@/utils/functions";
 import React from "react";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const { randomColor } = useColorStore();
+  const { isTryhardMode } = useWinStore();
+  const tryhardMode = isTryhardMode();
   const backgroundColor = getStringFromHSL({
     ...randomColor,
     l: LIGHTNESS_BACKGROUND,
   });
   const dotColor = `hsla(${randomColor.h}, ${randomColor.s}%, ${LIGHTNESS_FOREGROUND}%, 0.15)`;
+
   return (
     <main
       style={{
@@ -20,7 +23,10 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
         backgroundSize: "48px 48px",
         backgroundPosition: "-22px -22px",
       }}
-      className="h-d-screen flex md:flex-row flex-col items-center pt-24 md:pt-0 justify-start md:justify-center gap-0 md:gap-24 w-full overflow-hidden relative"
+      className={cn(
+        "h-d-screen flex md:flex-row flex-col items-center pt-24 md:pt-0 justify-start md:justify-center gap-0 md:gap-24 w-full overflow-hidden relative",
+        tryhardMode && "border-8 border-orange-500"
+      )}
     >
       {children}
     </main>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "@/styles/globals.css";
 
 const dm_mono = DM_Mono({
@@ -33,6 +34,9 @@ export default function RootLayout({
         />
       </head>
       <body className="overflow-hidden">{children}</body>
+      <GoogleAnalytics
+        gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS as string}
+      />
     </html>
   );
 }
