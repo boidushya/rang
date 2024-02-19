@@ -18,14 +18,6 @@ function getDateDifference(startDate: Date, endDate: Date) {
   return (start - end) / oneDay;
 }
 
-const getUniformDate = (date: Date) => {
-  const uniformDate = new Date(
-    date.getTime() + date.getTimezoneOffset() * 60000
-  );
-
-  return uniformDate;
-};
-
 const getFormattedDate = (date: Date): string => {
   const year = date.getUTCFullYear();
   const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
@@ -36,17 +28,15 @@ const getFormattedDate = (date: Date): string => {
 
 export async function GET(request: NextRequest) {
   const seed_salt = process.env.SEED_SALT;
-  const date = getUniformDate(new Date());
+  const date = new Date();
   const formattedDate = getFormattedDate(date);
 
   const seed = Number(formattedDate + seed_salt);
 
   const rng = mersenne(seed);
 
-  const startDate = new Date(2024, 1, 19);
-  const edition =
-    getDateDifference(getUniformDate(startDate), getUniformDate(new Date())) +
-    1;
+  const startDate = new Date(Date.UTC(2024, 1, 19));
+  const edition = getDateDifference(startDate, new Date()) + 1;
 
   const h = prand.unsafeUniformIntDistribution(0, 360, rng);
   const s = prand.unsafeUniformIntDistribution(0, 100, rng);
