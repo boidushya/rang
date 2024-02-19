@@ -6,6 +6,7 @@ import {
 import { create } from "zustand";
 import { hexToHsl } from "../utils/functions";
 import { persist } from "zustand/middleware";
+import expiryStorage from "./storage";
 
 export type TColorHSL = {
   h: number;
@@ -49,8 +50,7 @@ export const useColorStore: () => IColorStore = create<IColorStore>()(
       randomColor: initialRandomColor,
       setFixedRandomColor: async () => {
         const { edition, ...hsl } = await fetchRandomColor();
-        set({ randomColor: hsl });
-        set({ edition });
+        set({ randomColor: hsl, edition });
       },
       getColorHex: () => hslToHex(get().color),
       setColor: (color: TColorHSL) => set({ color }),
@@ -90,6 +90,7 @@ export const useWinStore: () => IWinStore = create<IWinStore>()(
     }),
     {
       name: "__RB::winStore__",
+      storage: expiryStorage,
     }
   )
 );

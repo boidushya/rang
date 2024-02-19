@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import expiryStorage from "./storage";
 
 type TTime = {
   sec: number;
@@ -34,6 +35,7 @@ export const useTimerStore: () => ITimerStore = create<ITimerStore>()(
     }),
     {
       name: "__RB::TimerStore",
+      storage: expiryStorage,
     }
   )
 );

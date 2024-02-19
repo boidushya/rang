@@ -5,12 +5,50 @@ import { useTimer } from "@layerhub-io/use-timer";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 
+const getTimeToNextEdition = () => {
+  const nextEdition = new Date();
+  nextEdition.setUTCHours(24, 0, 0, 0);
+  const now = new Date();
+  const diff = nextEdition.getTime() - now.getTime();
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  return {
+    minutes,
+    hours,
+  };
+};
+
+const getNextEditionText = () => {
+  const { hours, minutes } = getTimeToNextEdition();
+
+  let hoursText = "";
+  let minutesText = "";
+
+  if (hours > 0) {
+    hoursText = `${hours} hour`;
+    if (hours > 1) {
+      hoursText += "s and";
+    }
+  }
+
+  if (minutes > 0) {
+    minutesText = `${minutes} minute`;
+    if (minutes > 1) {
+      minutesText += "s";
+    }
+  }
+
+  return `Next edition in ${hoursText} ${minutesText}`;
+};
+
 const WinScreen = () => {
   const { win, setTryhardMode, winText, isTryhardModeSolved } = useWinStore();
   const { edition } = useColorStore();
   const { start } = useTimer();
   const { elapsedTime, resetTimer } = useTimerStore();
   const formattedElapsedTime = elapsedTimeToString(elapsedTime);
+
+  const nextEditionText = getNextEditionText();
 
   return (
     <AnimatePresence>
@@ -63,13 +101,16 @@ const WinScreen = () => {
           >
             Edition #{edition}
           </p>
-          <div className="flex flex-col items-center gap-4 px-12">
+          <div className="flex flex-col items-center gap-2 px-12">
             <h1 className="text-4xl md:text-7xl font-black">
               {isTryhardModeSolved
                 ? `Tryhard Mode solved in ${formattedElapsedTime}`
                 : `Solved in ${formattedElapsedTime}`}
             </h1>
-            <p className="text-base md:text-xl font-medium">{winText}</p>
+            <p className="text-base md:text-xl font-medium mt-2">{winText}</p>
+            <p className="text-base md:text-xl font-medium mb-2">
+              {nextEditionText}
+            </p>
             {!isTryhardModeSolved && (
               <button
                 onClick={() => {

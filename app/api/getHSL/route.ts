@@ -19,9 +19,9 @@ function getDateDifference(startDate: Date, endDate: Date) {
 }
 
 const getUniformDate = (date: Date) => {
-  const utcString = date.toUTCString();
-
-  const uniformDate = new Date(utcString);
+  const uniformDate = new Date(
+    date.getTime() + date.getTimezoneOffset() * 60000
+  );
 
   return uniformDate;
 };
@@ -43,8 +43,10 @@ export async function GET(request: NextRequest) {
 
   const rng = mersenne(seed);
 
-  const startDate = new Date(2024, 1, 18);
-  const edition = getDateDifference(startDate, getUniformDate(new Date())) + 1;
+  const startDate = new Date(2024, 1, 19);
+  const edition =
+    getDateDifference(getUniformDate(startDate), getUniformDate(new Date())) +
+    1;
 
   const h = prand.unsafeUniformIntDistribution(0, 360, rng);
   const s = prand.unsafeUniformIntDistribution(0, 100, rng);
