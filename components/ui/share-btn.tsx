@@ -7,9 +7,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useIsDesktop } from "@/utils/hooks";
 
-const externalOpen = (URL: string | URL | undefined) =>
-  window.open(URL, "_blank", "noopener");
+const externalOpen = (URL: string) => window.open(URL, "_blank", "noopener");
 
 type TShareBtnProps = {
   url: string;
@@ -43,10 +43,11 @@ const shareBtnGroup = [
         <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
       </SVG>
     ),
-    onClick: (data: TShareBtnProps) =>
+    onClick: (data: TShareBtnProps) => {
       externalOpen(
-        `https://twitter.com/intent/tweet?text=${data.title}&url=${data.url}`
-      ),
+        `https://twitter.com/intent/tweet?text=${data.text}&url=${data.url}`
+      );
+    },
   },
   {
     text: "Facebook",
@@ -68,7 +69,7 @@ const shareBtnGroup = [
     ),
     onClick: (data: TShareBtnProps) =>
       externalOpen(
-        `https://www.reddit.com/submit?url=${data.url}&title=${data.title}`
+        `https://www.reddit.com/submit?url=${data.url}&title=${data.text}`
       ),
   },
   {
@@ -81,7 +82,7 @@ const shareBtnGroup = [
     ),
     onClick: (data: TShareBtnProps) =>
       externalOpen(
-        `https://telegram.me/share/msg?url=${data.url}&text=${data.title}`
+        `https://telegram.me/share/msg?url=${data.url}&text=${data.text}`
       ),
   },
   {
@@ -96,7 +97,7 @@ const shareBtnGroup = [
       </SVG>
     ),
     onClick: (data: TShareBtnProps) =>
-      externalOpen(`mailto:?body=${data.url}&subject=${data.title}`),
+      externalOpen(`mailto:?body=${data.url}&subject=${data.text}`),
   },
   {
     text: "Copy Link",
@@ -110,12 +111,16 @@ const shareBtnGroup = [
       </SVG>
     ),
     onClick: (data: TShareBtnProps) =>
-      navigator.clipboard.writeText(decodeURIComponent(data.url)),
+      navigator.clipboard.writeText(
+        `${decodeURIComponent(data.text)}\n${decodeURIComponent(data.url)}`
+      ),
   },
 ];
 
 const ShareBtn = ({ url, text, title }: TShareBtnProps) => {
   const shareDetails = { title, text, url };
+  const isDesktop = useIsDesktop();
+
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -131,7 +136,7 @@ const ShareBtn = ({ url, text, title }: TShareBtnProps) => {
   };
   return (
     <div>
-      {navigator.share !== undefined ? (
+      {navigator.share !== undefined || !isDesktop ? (
         <button
           onClick={handleShare}
           className="px-4 py-2 text-xl font-medium bg-indigo-900 text-indigo-200 rounded-md flex items-center justify-center gap-2 pr-5"
@@ -167,7 +172,13 @@ const ShareBtn = ({ url, text, title }: TShareBtnProps) => {
             {shareBtnGroup.map((item, index) => (
               <DropdownMenuItem key={index}>
                 <button
-                  onClick={() => item.onClick(shareDetails)}
+                  onClick={() =>
+                    item.onClick({
+                      title: encodeURIComponent(title),
+                      text: encodeURIComponent(text),
+                      url,
+                    })
+                  }
                   className="w-full h-full text-sm font-medium text-zinc-200 rounded-md flex items-center justify-between gap-2 focus:outline-none"
                 >
                   {item.text}
