@@ -20,7 +20,9 @@ const base64ToScore = (base64: string) => {
 };
 
 const GET = async ({ params }: { params: { slug: string } }) => {
-  const { elapsedTime, edition, isTryHardMode } = base64ToScore(params.slug);
+  const { elapsedTime, edition, isTryHardMode } = base64ToScore(
+    decodeURIComponent(params.slug)
+  );
 
   const time = elapsedTimeToString(elapsedTime);
 
