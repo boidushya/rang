@@ -11,6 +11,7 @@ type TTime = {
 export interface ITimerStore {
   startTime: number;
   elapsedTime: number;
+  oldTime: number;
   startTimer: () => void;
   stopTimer: () => void;
   resetTimer: () => void;
@@ -21,6 +22,7 @@ export const useTimerStore: () => ITimerStore = create<ITimerStore>()(
     (set, get) => ({
       startTime: performance.now(),
       elapsedTime: 0,
+      oldTime: 0,
       startTimer: () => {
         set({ startTime: performance.now() });
       },
@@ -30,6 +32,7 @@ export const useTimerStore: () => ITimerStore = create<ITimerStore>()(
         });
       },
       resetTimer: () => {
+        set({ oldTime: get().elapsedTime });
         set({ elapsedTime: 0, startTime: performance.now() });
       },
     }),

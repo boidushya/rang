@@ -18,8 +18,15 @@ import { useTimerStore } from "@/store/TimerUtils";
 import { useTimer } from "@layerhub-io/use-timer";
 const Timer = () => {
   const { color: currentColor, randomColor } = useColorStore();
-  const { setWin, cutoff, win, isTryhardMode, setWinTryhard, setWinNormal } =
-    useWinStore();
+  const {
+    setWin,
+    cutoff,
+    win,
+    isTryhardMode,
+    setWinTryhard,
+    setWinNormal,
+    isTryhardModeSolved,
+  } = useWinStore();
   const { time, reset, start } = useTimer();
   const { stopTimer } = useTimerStore();
   const formattedTime = timeToString(time);
@@ -78,6 +85,12 @@ const Timer = () => {
       start();
     }, 2000);
   }, [start]);
+
+  React.useEffect(() => {
+    if (cutoff === 100 && win === false) {
+      reset();
+    }
+  }, [cutoff, reset, win]);
 
   return (
     <div className="flex items-center justify-center gap-3 md:gap-4">

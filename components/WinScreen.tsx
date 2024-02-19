@@ -49,9 +49,10 @@ const WinScreen = () => {
   const [conductor, setConductor] = useState<TConductorInstance>();
 
   const { edition } = useColorStore();
-  const { start } = useTimer();
-  const { elapsedTime, resetTimer } = useTimerStore();
-  const formattedElapsedTime = elapsedTimeToString(elapsedTime);
+  const { start, pause } = useTimer();
+  const { elapsedTime, oldTime, resetTimer } = useTimerStore();
+  const adjustedTime = elapsedTime === 0 ? oldTime : elapsedTime;
+  const formattedElapsedTime = elapsedTimeToString(adjustedTime);
 
   const nextEditionText = getNextEditionText();
 
@@ -62,7 +63,7 @@ const WinScreen = () => {
   const generateShareURL = () => {
     const url = new URL(
       `${window.location.origin}/share/${encodeURIComponent(
-        scoreToBase64(elapsedTime, edition, isTryhardModeSolved)
+        scoreToBase64(adjustedTime, edition, isTryhardModeSolved)
       )}`
     );
     return url.toString();
@@ -80,6 +81,12 @@ const WinScreen = () => {
       conductor.shoot();
     }
   }, [win, conductor]);
+
+  useEffect(() => {
+    if (win && isTryhardModeSolved) {
+      pause();
+    }
+  }, [win, isTryhardModeSolved, pause]);
 
   return (
     <AnimatePresence>
@@ -158,9 +165,9 @@ const WinScreen = () => {
                 {!isTryhardModeSolved && (
                   <button
                     onClick={() => {
-                      setTryhardMode();
-                      resetTimer();
+                      elapsedTime !== 0 && resetTimer();
                       start();
+                      setTryhardMode();
                     }}
                     className="px-4 py-2 text-xl font-medium bg-zinc-900 text-zinc-200 rounded-md flex items-center justify-center gap-2 pr-5"
                   >
