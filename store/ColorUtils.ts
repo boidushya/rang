@@ -89,7 +89,7 @@ export const useWinStore: () => IWinStore = create<IWinStore>()(
         }),
     }),
     {
-      name: "__RB::winStore__",
+      name: "__RB::WinStore",
       storage: expiryStorage,
     }
   )
