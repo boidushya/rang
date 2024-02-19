@@ -60,7 +60,7 @@ export const useColorStore: () => IColorStore = create<IColorStore>()(
   }
 );
 
-const initialCutoff = 98.5;
+const initialCutoff = 98;
 
 export const useWinStore: () => IWinStore = create<IWinStore>()(
   persist(

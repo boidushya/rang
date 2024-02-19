@@ -74,8 +74,8 @@ const InfoDialog = () => {
             <h1 className="text-lg font-semibold mt-1.5">Normal Mode</h1>
             <p>
               You have to select the color that is closest to the given color.
-              Normal mode has a cutoff of 98.5%, i.e, if you select a color
-              thats 98.5% or more similar, you win.{" "}
+              Normal mode has a cutoff of 98%, i.e, if you select a color thats
+              98% or more similar, you win.{" "}
             </p>
             <h1 className="text-lg font-semibold mt-1.5">Tryhard Mode</h1>
 
