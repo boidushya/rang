@@ -24,7 +24,6 @@ const storage: StateStorage = {
 
     const item = {
       value: value,
-      // Set expiry to midnight
       expiry: now.getTime(),
     };
     localStorage.setItem(key, JSON.stringify(item));
