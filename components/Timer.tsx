@@ -80,11 +80,11 @@ const Timer = () => {
   }, [start]);
 
   return (
-    <div className="flex items-center justify-center gap-4">
+    <div className="flex items-center justify-center gap-3 md:gap-4">
       {tryhardMode && <TryhardDialog />}
 
       <div
-        className="flex items-center justify-center uppercase font-medium text-2xl"
+        className="flex items-center justify-center uppercase font-medium text-lg md:text-2xl"
         style={{ boxShadow }}
       >
         <div
@@ -92,7 +92,7 @@ const Timer = () => {
             backgroundColor,
             color,
           }}
-          className="p-3 py-3 font-medium"
+          className="p-2.5 md:p-3 md:py-3 font-medium"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

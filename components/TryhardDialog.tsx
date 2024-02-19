@@ -11,14 +11,14 @@ const TryhardDialog = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="bg-orange-400 text-orange-900 h-12 w-12 grid place-items-center font-medium rounded-full hover:bg-orange-500 hover:text-orange-950 transition-colors">
+        <button className="bg-orange-400 text-orange-900 h-10 w-10 md:h-12 md:w-12 grid place-items-center font-medium rounded-full hover:bg-orange-500 hover:text-orange-950 transition-colors">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={2}
             stroke="currentColor"
-            className="w-6 h-6 inline-block"
+            className="h-5 w-5 md:w-6 md:h-6 inline-block"
           >
             <path
               strokeLinecap="round"

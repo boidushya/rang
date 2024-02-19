@@ -251,13 +251,23 @@ export function formatElapsedTime(elapsedTime: number) {
 
 export function elapsedTimeToString(elapsedTime: number) {
   const { millis, seconds, minutes, hours } = formatElapsedTime(elapsedTime);
-  let formattedTime = `${seconds}.${millis} s`;
+  let formattedTime = `${seconds}.${millis}s`;
   if (minutes > 0) {
-    formattedTime = `${minutes} m & ${formattedTime}`;
+    formattedTime = `${minutes}m & ${formattedTime}`;
   }
   if (hours > 0) {
-    formattedTime = `${hours} h, ${formattedTime}`;
+    formattedTime = `${hours}h, ${formattedTime}`;
   }
 
   return formattedTime;
+}
+
+export function scoreToBase64(
+  elapsedTime: number,
+  edition: number,
+  isTryHardMode: boolean
+) {
+  const score = { t: elapsedTime, e: edition, i: isTryHardMode };
+  const json = JSON.stringify(score);
+  return btoa(json);
 }

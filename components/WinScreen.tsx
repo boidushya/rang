@@ -1,11 +1,12 @@
 import { useColorStore, useWinStore } from "@/store/ColorUtils";
 import { useTimerStore } from "@/store/TimerUtils";
-import { cn, elapsedTimeToString } from "@/utils/functions";
+import { cn, elapsedTimeToString, scoreToBase64 } from "@/utils/functions";
 import { useTimer } from "@layerhub-io/use-timer";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import Confetti from "react-canvas-confetti/dist/presets/realistic";
 import { TConductorInstance } from "react-canvas-confetti/dist/types";
+import ShareBtn from "./ui/share-btn";
 
 const getTimeToNextEdition = () => {
   const nextEdition = new Date();
@@ -58,6 +59,22 @@ const WinScreen = () => {
     setConductor(conductor);
   };
 
+  const generateShareURL = () => {
+    const url = new URL(
+      `${window.location.origin}/share/${encodeURIComponent(
+        scoreToBase64(elapsedTime, edition, isTryhardModeSolved)
+      )}`
+    );
+    return url.toString();
+  };
+
+  const generateShareText = () => {
+    if (isTryhardModeSolved) {
+      return `#Rang ! #${edition} | Tryhard Mode 🔥 (100%) | ${formattedElapsedTime} 🏁\n`;
+    }
+    return `#Rang ! #${edition} 🎉 | ${formattedElapsedTime} 🏁\n`;
+  };
+
   useEffect(() => {
     if (win && conductor) {
       conductor.shoot();
@@ -103,7 +120,7 @@ const WinScreen = () => {
             />
             <h1
               className={cn(
-                "absolute top-0 left-1/2 -translate-x-1/2 py-12 font-black text-3xl md:text-5xl w-full",
+                "absolute top-0 left-1/2 -translate-x-1/2 py-12 font-black text-4xl md:text-5xl w-full",
                 isTryhardModeSolved ? "text-zinc-300/75" : "text-zinc-900/75"
               )}
             >
@@ -111,7 +128,7 @@ const WinScreen = () => {
             </h1>
             <div
               className={cn(
-                "absolute bottom-0 left-0 px-6 py-4 text-base md:text-2xl font-medium",
+                "absolute bottom-0 left-0 px-6 py-4 text-base md:text-xl font-medium",
                 isTryhardModeSolved ? "text-zinc-300/60" : "text-zinc-900/60"
               )}
             >
@@ -121,7 +138,7 @@ const WinScreen = () => {
             </div>
             <p
               className={cn(
-                "absolute bottom-0 right-0 px-6 py-4 text-base md:text-2xl font-medium",
+                "absolute bottom-0 right-0 px-6 py-4 text-base md:text-xl font-medium",
                 isTryhardModeSolved ? "text-zinc-300/60" : "text-zinc-900/60"
               )}
             >
@@ -137,30 +154,37 @@ const WinScreen = () => {
               <p className="text-base md:text-xl font-medium mb-2">
                 {nextEditionText}
               </p>
-              {!isTryhardModeSolved && (
-                <button
-                  onClick={() => {
-                    setTryhardMode();
-                    resetTimer();
-                    start();
-                  }}
-                  className="px-4 py-2 text-xl font-medium bg-zinc-900 text-zinc-200 rounded-md flex items-center justify-center gap-2 pr-5"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-5 h-5 text-orange-400"
+              <div className="flex md:flex-row flex-col items-center justify-center gap-3 mt-2">
+                {!isTryhardModeSolved && (
+                  <button
+                    onClick={() => {
+                      setTryhardMode();
+                      resetTimer();
+                      start();
+                    }}
+                    className="px-4 py-2 text-xl font-medium bg-zinc-900 text-zinc-200 rounded-md flex items-center justify-center gap-2 pr-5"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.176 7.547 7.547 0 0 1-1.705-1.715.75.75 0 0 0-1.152-.082A9 9 0 1 0 15.68 4.534a7.46 7.46 0 0 1-2.717-2.248ZM15.75 14.25a3.75 3.75 0 1 1-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 0 1 1.925-3.546 3.75 3.75 0 0 1 3.255 3.718Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Tryhard Mode
-                </button>
-              )}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-5 h-5 text-orange-400"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.176 7.547 7.547 0 0 1-1.705-1.715.75.75 0 0 0-1.152-.082A9 9 0 1 0 15.68 4.534a7.46 7.46 0 0 1-2.717-2.248ZM15.75 14.25a3.75 3.75 0 1 1-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 0 1 1.925-3.546 3.75 3.75 0 0 1 3.255 3.718Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Tryhard Mode
+                  </button>
+                )}
+                <ShareBtn
+                  url={generateShareURL()}
+                  text={generateShareText()}
+                  title="Rang! - The Color Accuracy Game!"
+                />
+              </div>
             </div>
           </motion.div>
         </>
