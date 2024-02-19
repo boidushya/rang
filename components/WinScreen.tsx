@@ -70,7 +70,7 @@ const WinScreen = () => {
 
   const generateShareText = () => {
     if (isTryhardModeSolved) {
-      return `#Rang ! #${edition} | Tryhard Mode 🔥 (100%) | ${formattedElapsedTime} 🏁\n`;
+      return `#Rang ! #${edition} 🎉 | Tryhard Mode 🔥 (100%) | ${formattedElapsedTime} 🏁\n`;
     }
     return `#Rang ! #${edition} 🎉 | ${formattedElapsedTime} 🏁\n`;
   };

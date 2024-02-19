@@ -100,7 +100,7 @@ const shareBtnGroup = [
       externalOpen(`mailto:?body=${data.url}&subject=${data.text}`),
   },
   {
-    text: "Copy Link",
+    text: "Share Score & Link",
     icon: (
       <SVG>
         <path

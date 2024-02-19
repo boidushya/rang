@@ -6,7 +6,6 @@ const GET = async () => {
   const fontData = await fetch(
     new URL("../assets/CabinetGrotesk.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
-
   return new ImageResponse(
     (
       <div

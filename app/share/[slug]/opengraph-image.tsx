@@ -8,11 +8,11 @@ export const runtime = "edge";
 const base64ToScore = (base64: string) => {
   try {
     const json = Buffer.from(base64, "base64").toString("utf-8");
-    const data = JSON.parse(json) as { t: number; e: number };
+    const data = JSON.parse(json) as { t: number; e: number; i: boolean };
     return {
       elapsedTime: data.t,
       edition: data.e,
-      isTryHardMode: data.t,
+      isTryHardMode: data.i,
     };
   } catch (err) {
     redirect(`/?utm_source=share&utm_medium=link&utm_campaign=${base64}`);
