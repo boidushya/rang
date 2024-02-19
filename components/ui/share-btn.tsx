@@ -136,7 +136,7 @@ const ShareBtn = ({ url, text, title }: TShareBtnProps) => {
   };
   return (
     <div>
-      {navigator.share !== undefined || !isDesktop ? (
+      {navigator.share !== undefined && !isDesktop ? (
         <button
           onClick={handleShare}
           className="px-4 py-2 text-xl font-medium bg-indigo-900 text-indigo-200 rounded-md flex items-center justify-center gap-2 pr-5"

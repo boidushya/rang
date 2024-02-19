@@ -1,3 +1,4 @@
+import Redirect from "@/components/Redirect";
 import { elapsedTimeToString } from "@/utils/functions";
 import { Metadata, ResolvingMetadata } from "next";
 import { redirect } from "next/navigation";
@@ -51,13 +52,14 @@ export async function generateMetadata(
 
 export default function Share({ params }: { params: { slug: string } }) {
   const { slug } = params;
-  //   // redirect to the home page with UTM parameters
-  //   redirect(`/?utm_source=share&utm_medium=link&utm_campaign=${slug}`);
 
   return (
     <div>
-      <h1>Share</h1>
-      <p>Slug: {slug}</p>
+      <h1 className="font-black text-2xl md:text-5xl animate-pulse">
+        <Redirect
+          to={`/?utm_source=share&utm_medium=link&utm_campaign=${slug}`}
+        />
+      </h1>
     </div>
   );
 }
