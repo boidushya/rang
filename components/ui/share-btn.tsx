@@ -112,7 +112,7 @@ const shareBtnGroup = [
     ),
     onClick: (data: TShareBtnProps) =>
       navigator.clipboard.writeText(
-        `${decodeURIComponent(data.text)}\n${decodeURIComponent(data.url)}`
+        `${decodeURIComponent(data.text)}\n${data.url}`
       ),
   },
 ];
