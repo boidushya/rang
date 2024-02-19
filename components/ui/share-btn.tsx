@@ -114,8 +114,6 @@ const shareBtnGroup = [
   },
 ];
 
-// encodeURIComponent(data.url)
-
 const ShareBtn = ({ url, text, title }: TShareBtnProps) => {
   const shareDetails = { title, text, url };
   const handleShare = async () => {

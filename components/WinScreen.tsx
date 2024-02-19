@@ -182,7 +182,9 @@ const WinScreen = () => {
                 <ShareBtn
                   url={generateShareURL()}
                   text={generateShareText()}
-                  title="Rang! - The Color Accuracy Game!"
+                  title={
+                    generateShareText() + " | Rang - The Color Accuracy Game!"
+                  }
                 />
               </div>
             </div>
