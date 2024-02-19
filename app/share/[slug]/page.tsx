@@ -37,16 +37,23 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const slug = params.slug;
-
   const { elapsedTime, edition, isTryHardMode } = base64ToScore(
     decodeURIComponent(params.slug)
   );
 
   const formattedElapsedTime = elapsedTimeToString(elapsedTime);
 
+  const title = generateTitle(
+    Boolean(isTryHardMode),
+    formattedElapsedTime,
+    edition
+  );
+
   return {
-    title: generateTitle(Boolean(isTryHardMode), formattedElapsedTime, edition),
+    title,
+    openGraph: {
+      title,
+    },
   };
 }
 

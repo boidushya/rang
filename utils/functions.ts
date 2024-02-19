@@ -251,12 +251,12 @@ export function formatElapsedTime(elapsedTime: number) {
 
 export function elapsedTimeToString(elapsedTime: number) {
   const { millis, seconds, minutes, hours } = formatElapsedTime(elapsedTime);
-  let formattedTime = `${seconds}.${millis}s`;
+  let formattedTime = `${seconds}s ${millis}ms`;
   if (minutes > 0) {
-    formattedTime = `${minutes}m & ${formattedTime}`;
+    formattedTime = `${minutes}m ${formattedTime}`;
   }
   if (hours > 0) {
-    formattedTime = `${hours}h, ${formattedTime}`;
+    formattedTime = `${hours}h ${formattedTime}`;
   }
 
   return formattedTime;
