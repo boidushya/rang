@@ -35,7 +35,7 @@ const TryhardDialog = () => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="z-20 fixed inset-0 bg-black/50 data-[state=open]:animate-overlayShow data-[state=closed]:animate-overlayHide" />
-        <Dialog.Content className="z-20 data-[state=open]:animate-contentShow data-[state=open]:animate-contentHide fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] bg-white p-8 shadow-md focus:outline-none">
+        <Dialog.Content className="z-20 data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] bg-white p-8 shadow-md focus:outline-none">
           <Dialog.Title className="font-bold text-2xl">
             Tryhard Mode!
           </Dialog.Title>
