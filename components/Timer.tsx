@@ -65,6 +65,7 @@ const Timer = () => {
   React.useEffect(() => {
     if (Number(points) >= cutoff && win === false) {
       reset();
+      start();
       stopTimer();
       console.log(points);
       cutoff === 100 ? setWinTryhard() : setWinNormal();
@@ -74,6 +75,7 @@ const Timer = () => {
     setWin,
     cutoff,
     win,
+    start,
     reset,
     stopTimer,
     setWinTryhard,
