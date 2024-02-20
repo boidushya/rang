@@ -101,7 +101,7 @@ const shareBtnGroup = [
       externalOpen(`mailto:?body=${data.url}&subject=${data.text}`),
   },
   {
-    text: "Copy Score & Link",
+    text: "Copy Results",
     icon: (
       <SVG>
         <path
@@ -114,7 +114,7 @@ const shareBtnGroup = [
     onClick: (data: TShareBtnProps) => {
       navigator.clipboard
         .writeText(`${decodeURIComponent(data.text)}\n${data.url}`)
-        .then(() => toast.success("Copied to clipboard!"));
+        .then(() => toast.success("Copied results to clipboard!"));
     },
   },
   {
@@ -138,7 +138,7 @@ const shareBtnGroup = [
               "image/png": imgBlob,
             }),
           ])
-          .then(() => toast.success("Copied Image to clipboard!"));
+          .then(() => toast.success("Copied image to clipboard!"));
       } catch (error) {
         console.error(error);
       }
