@@ -1,5 +1,5 @@
 import Redirect from "@/components/Redirect";
-import { elapsedTimeToString } from "@/utils/functions";
+import { decodeScore, elapsedTimeToString } from "@/utils/functions";
 import { Metadata, ResolvingMetadata } from "next";
 import { redirect } from "next/navigation";
 
@@ -16,13 +16,7 @@ const generateTitle = (
 
 const base64ToScore = (base64: string) => {
   try {
-    const json = Buffer.from(base64, "base64").toString("utf-8");
-    const data = JSON.parse(json) as { t: number; e: number; i: boolean };
-    return {
-      elapsedTime: data.t,
-      edition: data.e,
-      isTryHardMode: data.i,
-    };
+    return decodeScore(base64);
   } catch (err) {
     redirect(`/?utm_source=share&utm_medium=link&utm_campaign=${base64}`);
   }

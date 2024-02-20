@@ -1,6 +1,11 @@
 import { useColorStore, useWinStore } from "@/store/ColorUtils";
 import { useTimerStore } from "@/store/TimerUtils";
-import { cn, elapsedTimeToString, scoreToBase64 } from "@/utils/functions";
+import {
+  cn,
+  elapsedTimeToString,
+  encodeScore,
+  scoreToBase64,
+} from "@/utils/functions";
 import { useTimer } from "@layerhub-io/use-timer";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
@@ -63,7 +68,7 @@ const WinScreen = () => {
   const generateShareURL = () => {
     const url = new URL(
       `${window.location.origin}/share/${encodeURIComponent(
-        scoreToBase64(adjustedTime, edition, isTryhardModeSolved)
+        encodeScore(adjustedTime, edition, isTryhardModeSolved)
       )}`
     );
     return url.toString();

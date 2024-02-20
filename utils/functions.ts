@@ -5,6 +5,8 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { getDeltaE00 } from "delta-e";
 
+const pos = [2, 5];
+
 export function getStringFromHSL(value: TColorHSL) {
   return `hsl(${value.h}, ${value.s}%, ${value.l}%)`;
 }
@@ -270,4 +272,61 @@ export function scoreToBase64(
   const score = { t: elapsedTime, e: edition, i: isTryHardMode };
   const json = JSON.stringify(score);
   return btoa(json);
+}
+
+function randomString(len: number, charSet?: string) {
+  charSet =
+    charSet || "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var randomString = "";
+  for (var i = 0; i < len; i++) {
+    var randomPoz = Math.floor(Math.random() * charSet.length);
+    randomString += charSet.substring(randomPoz, randomPoz + 1);
+  }
+  return randomString;
+}
+
+function removeByIndex(str: string, index: number) {
+  return str.slice(0, index) + str.slice(index + 1);
+}
+
+export function encodeScore(
+  elapsedTime: number,
+  edition: number,
+  isTryHardMode: boolean
+) {
+  const id = randomString(2);
+  const chars = id.split("");
+
+  const values = `${Math.trunc(elapsedTime)},${edition},${Number(
+    isTryHardMode
+  )}`;
+  const base64 = btoa(values);
+
+  let modifiedBase64 = "";
+
+  let startIndex = 0;
+  for (const p of pos) {
+    modifiedBase64 += base64.substring(startIndex, p) + chars.shift();
+    startIndex = p;
+  }
+  modifiedBase64 += base64.substring(startIndex);
+
+  modifiedBase64 = modifiedBase64.replace(/=/g, "");
+
+  return modifiedBase64;
+}
+
+export function decodeScore(modifiedBase64: string) {
+  let base64 = modifiedBase64;
+
+  for (const p of pos) {
+    base64 = removeByIndex(base64, p);
+  }
+  const [elapsedTime, edition, isTryHardMode] = JSON.parse(`[${atob(base64)}]`);
+
+  return {
+    elapsedTime: Number(elapsedTime),
+    edition,
+    isTryHardMode: Boolean(isTryHardMode),
+  };
 }
