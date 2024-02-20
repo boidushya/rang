@@ -8,6 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useIsDesktop } from "@/utils/hooks";
+import { toast } from "sonner";
 
 const externalOpen = (URL: string) => window.open(URL, "_blank", "noopener");
 
@@ -100,7 +101,7 @@ const shareBtnGroup = [
       externalOpen(`mailto:?body=${data.url}&subject=${data.text}`),
   },
   {
-    text: "Share Score & Link",
+    text: "Copy Score & Link",
     icon: (
       <SVG>
         <path
@@ -110,10 +111,38 @@ const shareBtnGroup = [
         />
       </SVG>
     ),
-    onClick: (data: TShareBtnProps) =>
-      navigator.clipboard.writeText(
-        `${decodeURIComponent(data.text)}\n${data.url}`
-      ),
+    onClick: (data: TShareBtnProps) => {
+      navigator.clipboard
+        .writeText(`${decodeURIComponent(data.text)}\n${data.url}`)
+        .then(() => toast.success("Copied to clipboard!"));
+    },
+  },
+  {
+    text: "Copy Scorecard",
+    icon: (
+      <SVG>
+        <path
+          fillRule="evenodd"
+          d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z"
+          clipRule="evenodd"
+        />
+      </SVG>
+    ),
+    onClick: async (data: TShareBtnProps) => {
+      const img = await fetch(data.url + "/opengraph-image");
+      const imgBlob = await img.blob();
+      try {
+        navigator.clipboard
+          .write([
+            new ClipboardItem({
+              "image/png": imgBlob,
+            }),
+          ])
+          .then(() => toast.success("Copied Image to clipboard!"));
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 ];
 
@@ -172,14 +201,14 @@ const ShareBtn = ({ url, text, title }: TShareBtnProps) => {
             {shareBtnGroup.map((item, index) => (
               <DropdownMenuItem key={index}>
                 <button
-                  onClick={() =>
-                    item.onClick({
+                  onClick={async () =>
+                    await item.onClick({
                       title: encodeURIComponent(title),
                       text: encodeURIComponent(text),
                       url,
                     })
                   }
-                  className="w-full h-full text-sm font-medium text-zinc-200 rounded-md flex items-center justify-between gap-2 focus:outline-none"
+                  className="w-full h-full text-sm px-2 py-1.5 font-medium text-zinc-200 rounded-md flex items-center justify-between gap-2 focus:outline-none"
                 >
                   {item.text}
                   {item.icon}

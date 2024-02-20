@@ -12,6 +12,7 @@ import { TimerProvider } from "@layerhub-io/use-timer";
 import { useColorStore } from "@/store/ColorUtils";
 import React from "react";
 import Points from "@/components/Points";
+import { Toaster } from "sonner";
 
 export const LoadingScreen = () => {
   return (
@@ -58,6 +59,7 @@ export default function Home() {
       </>
       <Loader />
       <WinScreen />
+      <Toaster richColors />
     </TimerProvider>
   );
 }
