@@ -26,9 +26,23 @@ const getFormattedDate = (date: Date): string => {
   return `${year}${month}${day}`;
 };
 
+const getTodayInUTC = () => {
+  const date = new Date();
+  return new Date(
+    Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      0,
+      0,
+      0
+    )
+  );
+};
+
 export async function GET(request: NextRequest) {
   const seed_salt = process.env.SEED_SALT;
-  const date = new Date();
+  const date = getTodayInUTC();
   const formattedDate = getFormattedDate(date);
 
   const seed = Number(formattedDate + seed_salt);
@@ -36,7 +50,7 @@ export async function GET(request: NextRequest) {
   const rng = mersenne(seed);
 
   const startDate = new Date(Date.UTC(2024, 1, 19));
-  const edition = getDateDifference(startDate, new Date()) + 1;
+  const edition = getDateDifference(startDate, getTodayInUTC()) + 1;
 
   const h = prand.unsafeUniformIntDistribution(0, 360, rng);
   const s = prand.unsafeUniformIntDistribution(0, 100, rng);
