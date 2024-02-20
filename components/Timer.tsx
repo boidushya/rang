@@ -86,12 +86,6 @@ const Timer = () => {
     }, 2000);
   }, [start]);
 
-  React.useEffect(() => {
-    if (cutoff === 100 && !isTryhardModeSolved && !win) {
-      reset();
-    }
-  }, [cutoff, reset, win, isTryhardModeSolved]);
-
   return (
     <div className="flex items-center justify-center gap-3 md:gap-4">
       {tryhardMode && <TryhardDialog />}

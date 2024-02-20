@@ -49,7 +49,7 @@ const WinScreen = () => {
   const [conductor, setConductor] = useState<TConductorInstance>();
 
   const { edition } = useColorStore();
-  const { start, pause } = useTimer();
+  const { start, reset } = useTimer();
   const { elapsedTime, oldTime, resetTimer } = useTimerStore();
   const adjustedTime = elapsedTime === 0 ? oldTime : elapsedTime;
   const formattedElapsedTime = elapsedTimeToString(adjustedTime);
@@ -160,6 +160,7 @@ const WinScreen = () => {
                   <button
                     onClick={() => {
                       setTryhardMode();
+                      reset();
                       if (elapsedTime !== 0) {
                         resetTimer();
                       }
