@@ -29,7 +29,7 @@ const ShareBtn = ({ url, text, title }: TShareBtnProps) => {
   const handleCopy = () => {
     const data = shareDetails;
     navigator.clipboard
-      .writeText(`${decodeURIComponent(data.text)}\n${data.url}`)
+      .writeText(`${data.text}\n${data.url}`)
       .then(() => toast.success("Copied results to clipboard!"));
   };
   return (
