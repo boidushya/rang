@@ -166,7 +166,7 @@ const WinScreen = () => {
                   <button
                     onClick={() => {
                       setTryhardMode();
-                      elapsedTime !== 0 && resetTimer();
+                      resetTimer();
                       start();
                     }}
                     className="px-4 py-2 text-xl font-medium bg-zinc-900 text-zinc-200 rounded-md flex items-center justify-center gap-2 pr-5"
