@@ -1,5 +1,19 @@
 import { StateStorage, createJSONStorage } from "zustand/middleware";
 
+const getNowInUTC = () => {
+  const date = new Date();
+  return new Date(
+    Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      date.getUTCHours(),
+      date.getUTCMinutes(),
+      date.getUTCSeconds()
+    )
+  );
+};
+
 const storage: StateStorage = {
   getItem(key) {
     const itemStr = localStorage.getItem(key);
@@ -9,7 +23,7 @@ const storage: StateStorage = {
     }
 
     const item = JSON.parse(itemStr);
-    const now = new Date();
+    const now = getNowInUTC();
 
     if (now.getTime() > item.expiry) {
       localStorage.removeItem(key);
@@ -19,7 +33,7 @@ const storage: StateStorage = {
   },
 
   setItem(key, value) {
-    const now = new Date();
+    const now = getNowInUTC();
     now.setUTCHours(24, 0, 0, 0);
 
     const item = {
