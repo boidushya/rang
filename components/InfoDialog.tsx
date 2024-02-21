@@ -3,6 +3,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useColorStore } from "@/store/ColorUtils";
 import { getStringFromHSL } from "@/utils/functions";
 import { LIGHTNESS_BACKGROUND, LIGHTNESS_FOREGROUND } from "@/utils/constants";
+import ResetDialog from "./ResetDialog";
 
 const InfoDialog = () => {
   const { randomColor } = useColorStore();
@@ -40,7 +41,7 @@ const InfoDialog = () => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="z-20 fixed inset-0 bg-black/50 data-[state=open]:animate-overlayShow data-[state=closed]:animate-overlayHide" />
-        <Dialog.Content className="z-20 data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] bg-white p-8 shadow-md focus:outline-none">
+        <Dialog.Content className="z-20 data-[state=open]:animate-contentShow data-[state=closed]:animate-contentHide fixed top-[50%] left-[50%] max-h-[90vh] w-[90vw] max-w-[500px] translate-x-[-50%] translate-y-[-50%] bg-white p-8 shadow-md focus:outline-none">
           <Dialog.Title className="font-bold text-2xl">
             What is Rang?
           </Dialog.Title>
@@ -67,26 +68,26 @@ const InfoDialog = () => {
               .
             </p>
             <p>
-              Each day there{`'`}s a new target color (updated at 00:00 UTC) so
-              you can flex your color matching skills everyday.
+              Each day there{`'`}s a new target color so you can flex your color
+              matching skills everyday.
             </p>
 
             <h1 className="text-lg font-semibold mt-1.5">Normal Mode</h1>
             <p>
-              You have to select the color that is closest to the given color.
-              Normal mode has a cutoff of 98%, i.e, if you select a color thats
-              98% or more similar, you win.{" "}
+              You have to select a color that is closest to the given color.
+              Normal mode has a similarity cutoff of 98%
             </p>
             <h1 className="text-lg font-semibold mt-1.5">Tryhard Mode</h1>
 
             <p>
               Tryhard Mode has a cutoff of 100% and is obviously much harder. In
               this mode you get access to a similarity scoreboard. You can only
-              try this mode if you finish the normal mode.
+              try this mode if you finish normal mode.
             </p>
             <h1 className="text-lg font-semibold mt-1.5">Feedback</h1>
             <p>
-              Feel free to reach out to me on Twitter:{" "}
+              If you{"'"}re experiencing site issues try the reset button below
+              or reach out to me on Twitter:{" "}
               <a
                 href="https://twitter.com/boidushya"
                 target="blank"
@@ -96,7 +97,8 @@ const InfoDialog = () => {
               </a>
             </p>
           </Dialog.Description>
-          <div className="flex justify-end items-center gap-4 mt-8">
+          <div className="flex justify-between items-center gap-4 mt-8">
+            <ResetDialog />
             <Dialog.Close asChild>
               <button
                 className="px-4 py-2 text-lg font-medium text-indigo-900 bg-indigo-200 rounded-md flex items-center justify-center gap-2"
