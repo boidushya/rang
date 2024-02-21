@@ -54,7 +54,7 @@ const ShareBtn = ({ url, text, title }: TShareBtnProps) => {
             ? () => handleShare()
             : () => handleCopy()
         }
-        className="px-4 py-2 text-xl font-medium bg-indigo-900 text-indigo-200 rounded-md flex items-center justify-center gap-2 pr-5 relative"
+        className="px-4 py-2 text-xl font-medium bg-indigo-900 text-indigo-100 rounded-md flex items-center justify-center gap-2 pr-5 relative"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
