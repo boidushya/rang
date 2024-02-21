@@ -1,17 +1,8 @@
 import { StateStorage, createJSONStorage } from "zustand/middleware";
 
 const getNowInUTC = () => {
-  const date = new Date();
-  return new Date(
-    Date.UTC(
-      date.getUTCFullYear(),
-      date.getUTCMonth(),
-      date.getUTCDate(),
-      date.getUTCHours(),
-      date.getUTCMinutes(),
-      date.getUTCSeconds()
-    )
-  );
+  const now = new Date();
+  return new Date(now.getTime() + now.getTimezoneOffset() * 60000);
 };
 
 const storage: StateStorage = {
