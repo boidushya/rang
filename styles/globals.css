@@ -14,4 +14,38 @@ body {
     height: 100vh; /* fallback for Opera, IE and etc. */
     height: 100dvh;
   }
+  .animated-glow {
+    width: calc(100% + 0.375rem);
+    height: calc(100% + 0.375rem);
+
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden z-[-1] rounded-[0.55rem] shadow-xl;
+  }
+  .animated-glow:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    width: 99999px;
+    height: 99999px;
+    background: conic-gradient(
+      rgb(129 140 248 / 80%),
+      rgb(199 210 254 /80%),
+      rgb(129 140 248 / 80%) 25%
+    );
+    filter: blur(10px);
+    animation: rotate 2s linear infinite;
+  }
+  .animated-glow__dark:before {
+    background: conic-gradient(
+      rgb(99 102 241 / 80%),
+      rgb(165 180 252 / 80%),
+      rgb(99 102 241 / 80%) 25%
+    ) !important;
+  }
+  @keyframes rotate {
+    100% {
+      transform: translate(-50%, -50%) rotate(1turn);
+    }
+  }
 }
