@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prand, { mersenne } from "pure-rand";
 
+export const dynamic = "force-dynamic";
+
 function getDateDifference(startDate: Date, endDate: Date) {
   const oneDay = 1000 * 60 * 60 * 24;
 
