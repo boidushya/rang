@@ -14,7 +14,7 @@ const storage: StateStorage = {
     }
 
     const item = JSON.parse(itemStr);
-    const now = getNowInUTC();
+    const now = new Date();
 
     if (now.getTime() > item.expiry) {
       localStorage.removeItem(key);
