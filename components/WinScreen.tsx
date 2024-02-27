@@ -171,7 +171,7 @@ const WinScreen = () => {
                       }
                       start();
                     }}
-                    className="px-4 py-2 text-xl font-medium bg-zinc-900 text-zinc-200 rounded-md flex items-center justify-center gap-2 pr-5"
+                    className="px-4 py-2 text-xl font-medium bg-zinc-900 text-zinc-200 rounded-md flex items-center justify-center gap-2 pr-5 hover:bg-zinc-800 hover:text-zinc-100 transition-colors"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

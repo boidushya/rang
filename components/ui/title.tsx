@@ -1,9 +1,14 @@
 "use client";
 
 import { useColorStore } from "@/store/ColorUtils";
-import { LIGHTNESS_FOREGROUND, LIGHTNESS_SHADOW } from "@/utils/constants";
+import {
+  LIGHTNESS_FOREGROUND,
+  LIGHTNESS_SHADOW,
+  SHARED_TOP_VARIANT,
+} from "@/utils/constants";
 import { getStringFromHSL } from "@/utils/functions";
 import React from "react";
+import { motion } from "framer-motion";
 
 const Title = () => {
   const { randomColor } = useColorStore();
@@ -17,7 +22,10 @@ const Title = () => {
   };
   const textShadow = `4px 4px 0 ${getStringFromHSL(shadowColor)}`;
   return (
-    <h1
+    <motion.h1
+      variants={SHARED_TOP_VARIANT}
+      initial="initial"
+      animate="animate"
       style={{
         color,
         textShadow,
@@ -25,7 +33,7 @@ const Title = () => {
       className="font-black text-5xl"
     >
       Rang!
-    </h1>
+    </motion.h1>
   );
 };
 

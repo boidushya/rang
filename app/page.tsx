@@ -4,7 +4,6 @@ import CustomColorPicker from "@/components/CustomColorPicker";
 import ColorSection from "@/components/ColorSection";
 import Wrapper from "@/components/ui/wrapper";
 import Nav from "@/components/ui/nav";
-import RefreshButton from "@/components/RefreshButton";
 import Loader from "@/components/Loader";
 import WinScreen from "@/components/WinScreen";
 import Edition from "@/components/Edition";

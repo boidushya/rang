@@ -14,8 +14,10 @@ import {
   LIGHTNESS_BACKGROUND,
   LIGHTNESS_FOREGROUND,
   LIGHTNESS_SHADOW,
+  SHARED_MIDDLE_VARIANT,
 } from "@/utils/constants";
 import { useIsDesktop } from "@/utils/hooks";
+import { motion } from "framer-motion";
 
 const CustomColorPicker = () => {
   const { color, setColor, getColorHex, setColorHex } = useColorStore();
@@ -37,7 +39,10 @@ const CustomColorPicker = () => {
   })}`;
 
   return (
-    <div
+    <motion.div
+      variants={SHARED_MIDDLE_VARIANT}
+      initial="initial"
+      animate="animate"
       style={{
         borderColor,
         boxShadow: isDesktop ? boxShadow : `none`,
@@ -46,7 +51,7 @@ const CustomColorPicker = () => {
       className="custom-color-picker border-4 md:border-8 h-48 md:h-96 w-full md:w-96 flex flex-col "
     >
       <HslColorPicker color={color} onChange={setColor} />
-    </div>
+    </motion.div>
   );
 };
 

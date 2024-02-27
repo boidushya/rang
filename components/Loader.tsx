@@ -82,12 +82,15 @@ const Loader = () => {
       setCurrentSlide((prev) => (prev + 1) % contentSlides.length);
     }, 200);
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       startTimer();
       setIsLoading(false);
     }, 2000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
