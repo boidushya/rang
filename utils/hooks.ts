@@ -1,5 +1,6 @@
 // https://usehooks-ts.com/react-hook/use-media-query
 
+import { useColorStore } from "@/store/ColorUtils";
 import { useState } from "react";
 
 import { useEffect, useLayoutEffect } from "react";
@@ -112,4 +113,9 @@ export function useMediaQuery(
 
 export function useIsDesktop() {
   return useMediaQuery("(min-width: 768px)");
+}
+
+export function useIsFetching() {
+  const { randomColor } = useColorStore();
+  return randomColor === null;
 }
