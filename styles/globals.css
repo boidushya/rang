@@ -26,14 +26,15 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(0deg);
-    width: 99999px;
-    height: 99999px;
+    width: 999px;
+    height: 999px;
     background: conic-gradient(
       rgb(129 140 248 / 80%),
       rgb(199 210 254 /80%),
       rgb(129 140 248 / 80%) 25%
     );
     filter: blur(10px);
+    z-index: -1;
     animation: rotate 2s linear infinite;
   }
   .animated-glow__dark:before {

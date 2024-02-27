@@ -6,6 +6,7 @@ import {
   LIGHTNESS_FOREGROUND,
   LIGHTNESS_MID,
   LIGHTNESS_SHADOW,
+  SHARED_TOP_VARIANT,
 } from "@/utils/constants";
 import {
   calculatePoints,
@@ -16,6 +17,8 @@ import React, { useMemo } from "react";
 import TryhardDialog from "./TryhardDialog";
 import { useTimerStore } from "@/store/TimerUtils";
 import { useTimer } from "@layerhub-io/use-timer";
+import { motion } from "framer-motion";
+
 const Timer = () => {
   const { color: currentColor, randomColor } = useColorStore();
   const {
@@ -83,13 +86,19 @@ const Timer = () => {
   ]);
 
   React.useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       start();
     }, 2000);
+    return () => clearTimeout(timeout);
   }, [start]);
 
   return (
-    <div className="flex items-center justify-center gap-3 md:gap-4">
+    <motion.div
+      variants={SHARED_TOP_VARIANT}
+      initial="initial"
+      animate="animate"
+      className="flex items-center justify-center gap-3 md:gap-4"
+    >
       {tryhardMode && <TryhardDialog />}
 
       <div
@@ -128,7 +137,7 @@ const Timer = () => {
           <>{formattedTime}</>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

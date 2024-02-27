@@ -7,6 +7,7 @@ import {
   LIGHTNESS_FOREGROUND,
   LIGHTNESS_LIGHTEST,
   LIGHTNESS_SHADOW,
+  SHARED_MIDDLE_VARIANT,
 } from "@/utils/constants";
 import { getStringFromHSL, hslToHex } from "@/utils/functions";
 import { useIsDesktop } from "@/utils/hooks";
@@ -51,14 +52,19 @@ const ColorSection = () => {
   const colorHEX = hslToHex(color);
 
   React.useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setShownInstructions(true);
     }, 10000);
+
+    return () => clearTimeout(timeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div
+    <motion.div
+      variants={SHARED_MIDDLE_VARIANT}
+      initial="initial"
+      animate="animate"
       style={{
         backgroundColor: getStringFromHSL(randomColor),
         borderColor: getStringFromHSL({
@@ -132,7 +138,7 @@ const ColorSection = () => {
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

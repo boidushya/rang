@@ -3,6 +3,7 @@ import {
   LIGHTNESS_BACKGROUND,
   LIGHTNESS_FOREGROUND,
   LIGHTNESS_SHADOW,
+  SHARED_BOTTOM_VARIANT,
 } from "@/utils/constants";
 import { calculatePoints, getStringFromHSL } from "@/utils/functions";
 import React, { useMemo } from "react";
@@ -65,7 +66,12 @@ const Points = () => {
   })}`;
 
   return (
-    <div className="flex items-center justify-center gap-3">
+    <motion.div
+      variants={SHARED_BOTTOM_VARIANT}
+      initial="initial"
+      animate="animate"
+      className="flex items-center justify-center gap-3"
+    >
       <InfoDialog />
       <Dialog.Root>
         <Dialog.Trigger asChild>
@@ -174,7 +180,7 @@ const Points = () => {
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
-    </div>
+    </motion.div>
   );
 };
 
