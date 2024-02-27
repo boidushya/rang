@@ -5,7 +5,7 @@ export const LIGHTNESS_SHADOW = 80;
 export const LIGHTNESS_BACKGROUND = 90;
 
 const SHARED_TRANSITION = {
-  delay: 1.85,
+  delay: 1.8,
 };
 
 export const SHARED_TOP_VARIANT = {

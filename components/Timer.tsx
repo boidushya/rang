@@ -86,9 +86,10 @@ const Timer = () => {
   ]);
 
   React.useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       start();
     }, 2000);
+    return () => clearTimeout(timeout);
   }, [start]);
 
   return (

@@ -52,9 +52,11 @@ const ColorSection = () => {
   const colorHEX = hslToHex(color);
 
   React.useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       setShownInstructions(true);
     }, 10000);
+
+    return () => clearTimeout(timeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
