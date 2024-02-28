@@ -24,7 +24,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
         backgroundPosition: "-22px -22px",
       }}
       className={cn(
-        "h-d-screen flex md:flex-row flex-col items-center pt-24 md:pt-0 justify-start md:justify-center gap-0 md:gap-24 w-full overflow-hidden relative px-2 md:px-0",
+        "h-d-screen pt-24 md:pt-0 w-full overflow-hidden relative px-2 md:px-0",
         tryhardMode && "border-8 border-orange-500"
       )}
     >
