@@ -27,9 +27,10 @@ export default function Home() {
       {!isFetching && (
         <Wrapper>
           <Nav />
-
-          <ColorSection />
-          <CustomColorPicker />
+          <div className="flex md:flex-row flex-col items-center justify-start md:justify-center md:h-full h-[calc(100%_-_5.25rem)] w-full gap-0 lg:gap-24 md:gap-8">
+            <ColorSection />
+            <CustomColorPicker />
+          </div>
           <div className="flex items-center justify-between w-full p-4 py-6 md:py-12 md:p-12 fixed bottom-0 left-0">
             <Edition />
             <Points />

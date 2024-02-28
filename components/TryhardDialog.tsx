@@ -1,6 +1,7 @@
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useWinStore } from "@/store/ColorUtils";
+import { motion } from "framer-motion";
 
 const TryhardDialog = () => {
   const {
@@ -11,7 +12,11 @@ const TryhardDialog = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="bg-orange-400 text-orange-900 h-10 w-10 md:h-12 md:w-12 grid place-items-center font-medium rounded-full hover:bg-orange-500 hover:text-orange-950 transition-colors">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="bg-orange-400 text-orange-900 h-10 w-10 md:h-12 md:w-12 grid place-items-center font-medium rounded-full hover:bg-orange-500 hover:text-orange-950 hover:shadow-xl transition-all"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -31,7 +36,7 @@ const TryhardDialog = () => {
               d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z"
             />
           </svg>
-        </button>
+        </motion.button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="z-20 fixed inset-0 bg-black/50 data-[state=open]:animate-overlayShow data-[state=closed]:animate-overlayHide" />

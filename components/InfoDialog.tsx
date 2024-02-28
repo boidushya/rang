@@ -4,6 +4,7 @@ import { useColorStore } from "@/store/ColorUtils";
 import { getStringFromHSL } from "@/utils/functions";
 import { LIGHTNESS_BACKGROUND, LIGHTNESS_FOREGROUND } from "@/utils/constants";
 import ResetDialog from "./ResetDialog";
+import { motion } from "framer-motion";
 
 const InfoDialog = () => {
   const { randomColor } = useColorStore();
@@ -19,9 +20,11 @@ const InfoDialog = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           style={{ color, backgroundColor }}
-          className="h-9 w-9 grid place-items-center font-medium rounded-full hover:bg-orange-500 hover:text-orange-950 transition-colors"
+          className="h-9 w-9 grid place-items-center font-medium rounded-full shadow-none transition-shadow hover:shadow-xl"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +40,7 @@ const InfoDialog = () => {
               d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
             />
           </svg>
-        </button>
+        </motion.button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="z-20 fixed inset-0 bg-black/50 data-[state=open]:animate-overlayShow data-[state=closed]:animate-overlayHide" />
